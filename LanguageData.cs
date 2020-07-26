@@ -29,7 +29,7 @@ namespace LangExercise
             DateModified = DateCreated;
         }
 
-        public LanguageData(string name, string code): base()
+        public LanguageData(string name, string code): this()
         {
             Name = name;
             Code = code;
@@ -84,7 +84,10 @@ namespace LangExercise
 
         public bool Remove(string sourceSentence)
         {
-            return Entries.Remove(sourceSentence);
+            bool deleted = Entries.Remove(sourceSentence);
+            if (deleted)
+                IsModified = true;
+            return deleted;
         }
 
         public int Count() => Entries.Count;
